@@ -6,13 +6,13 @@ metadata:
     type: local
     app: postgres
 spec:
-  storageClassName: microk8s-hostpath
+  storageClassName: slow
   capacity:
     storage: 5Gi
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/opt/postgress/data"
+    path: "/var/lib/data"
 
 ---
 kind: PersistentVolumeClaim
@@ -22,7 +22,7 @@ metadata:
   labels:
     app: postgres
 spec:
-  storageClassName: microk8s-hostpath
+  storageClassName: slow
   accessModes:
     - ReadWriteMany
   resources:
