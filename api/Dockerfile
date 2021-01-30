@@ -11,9 +11,14 @@ RUN apt install -y python3
 RUN apt install -y libpq-dev
 #RUN python3 -m pip install -e .
 RUN apt install -y python3-pip
-COPY blog_api .
 RUN apt install -y postgresql-client
 #WORKDIR blog_api/
 RUN pip3 install -r requirements.txt
+
+COPY blog_api blog_api
+WORKDIR blog_api
+
+RUN mv migrations migrations.old
+
 EXPOSE 5000
-CMD ["python3", "run.py"]
+CMD ["/bin/bash", "setup.sh"]
