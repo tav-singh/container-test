@@ -2,8 +2,8 @@ FROM ubuntu:20.04
 
 #ENV FLASK_APP=app.py
 ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_ENV=development
-ENV DATABASE_URL=postgres://postgresadmin:admin123@10.152.183.142:5432/postgresdb
+#ENV FLASK_ENV=development
+#ENV DATABASE_URL=postgres://postgresadmin:admin123@10.152.183.142:5432/postgresdb
 COPY requirements.txt requirements.txt
 
 RUN apt update

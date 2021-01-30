@@ -8,3 +8,5 @@ data:
   POSTGRES_DB: postgresdb
   POSTGRES_USER: postgresadmin
   POSTGRES_PASSWORD: admin123
+  POSTGRES_PORT: 5432
+  DATABASE_URL: postgres://postgresadmin:admin123@postgres-service:5432/postgresdb
