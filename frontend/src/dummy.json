@@ -1,6 +1,8 @@
 [
     {
         "id": 1,
+        "username": "user1234",
+        "name": "user",
         "title": "Blog Post Number 1",
         "category": "film",
         "author": "blogger 1",
@@ -8,6 +10,8 @@
     },
     {
         "id": 2,
+        "username": "cooluser621",
+        "name": "cool user",
         "title": "Blog Post Number 2",
         "category": "food",
         "author": "blogger 1",
@@ -15,6 +19,8 @@
     },
     {
         "id": 3,
+        "username": "normaluser12354",
+        "name": "normal user",
         "title": "Blog Post Number 3",
         "category": "music",
         "author": "blogger 1",

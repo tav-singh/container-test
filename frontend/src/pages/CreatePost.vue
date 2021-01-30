@@ -1,14 +1,18 @@
 <template>
   <div class="create-post-container">
-    <h1>Create A Post</h1>
+    <h1>Add A User</h1>
     <div class="editor">
-      <input v-model="title" placeholder="Title">
-      <input v-model="author" placeholder="Author">
+      <!-- <input v-model="title" placeholder="Title">
+      <input v-model="author" placeholder="Author"> -->
+      <input v-model="username" placeholder="username">
+      <input type="password" v-model="password" placeholder="password">
+      <input v-model="name" placeholder="name">
+      <input v-model="email" placeholder="email">
       <br>
-      <wysiwyg v-model="content"  />
+      <!-- <wysiwyg v-model="content"  /> -->
     </div>
     <button class="pure-material-button-contained" @click="post">Post</button>
-    <span v-html="content"></span>
+    <!-- <span v-html="content"></span> -->
   </div>
 </template>
 
@@ -29,9 +33,13 @@ export default {
 
       let newPost = {
         id: locPosts.length+1,
-        title: this.title,
-        author: this.author,
-        content: this.content
+        // title: this.title,
+        // author: this.author,
+        // content: this.content,
+        username: this.username,
+        password: this.password,
+        name: this.name,
+        email: this.email
       }
       
       locPosts.push(newPost)

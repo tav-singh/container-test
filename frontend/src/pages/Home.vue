@@ -1,15 +1,17 @@
 <template>
   <div>
-    <h1>Blog</h1>
+    <h1>Users</h1>
     <div>
-      <button class="pure-material-button-contained" @click="addEntry">Add entry</button>
+      <button class="pure-material-button-contained" @click="addEntry">Add User</button>
     </div>
     <div class="posts-container">
-      <div class="posts" v-for="post in posts" :key="post.title" @click="navigatePost(post.id)">
-        <h4>{{ post.title }}</h4>
-        <div class="post-content">
+      <div class="posts" v-for="post in posts" :key="post.id" @click="navigatePost(post.id)">
+        <h4>{{ post.name }}</h4>
+        <p>{{post.username}}</p>
+        <p>{{post.username}}@mail.com</p>
+        <!-- <div class="post-content">
           <span v-html="post.content"></span>
-        </div>
+        </div> -->
       </div>
      </div>
   </div>
@@ -49,7 +51,7 @@ export default {
     },
     navigatePost(id) {
       console.log(id)
-      this.$router.push({path: `/posts/${id}`})
+      // this.$router.push({path: `/posts/${id}`})
     },
     addEntry() {
       this.$router.push({path: `/addentry/${this.userid}`})
