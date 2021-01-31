@@ -5,7 +5,7 @@ import wysiwyg from "vue-wysiwyg";
 import axios from 'axios'
 
 // const devUrl = 'http://35.187.123.194:5000/api/v1'
-const prodUrl = 'http://10.0.2.15:5000/api/v1/'
+const prodUrl = 'http://10.0.2.15:5000/api/v1'
 
 Vue.prototype.$http = axios
 Vue.prototype.$baseurl = prodUrl
