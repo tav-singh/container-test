@@ -18,6 +18,8 @@
 
 <script>
 // var json = require('../dummy.json');
+let https = require('http');
+
 export default {
   name: 'Home',
   data () {
@@ -46,8 +48,13 @@ export default {
       console.log(JSON.parse(window.localStorage.getItem('posts')))
     },
     fetchUsers: function () {
+
+      // At request level
+      const agent = new https.Agent({  
+        rejectUnauthorized: false
+      });
       const baseURI = `${this.$baseurl}/users/`
-      this.$http.get(baseURI)
+      this.$http.get(baseURI, { httpsAgent: agent })
       .then((result) => {
         this.users = result.data
         this.posts = this.users.users
