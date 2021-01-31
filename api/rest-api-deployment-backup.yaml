@@ -28,6 +28,21 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom: 
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_PORT
+              valueFrom: 
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_PORT
+            - name: POSTGRES_DB
+              valueFrom: 
+                configMapKeyRef:
+                  name: postgres-config
+                  key: POSTGRES_DB
             - name: DATABASE_URL
               value: postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@postgres-service:$(POSTGRES_PORT)/$(POSTGRES_DB) 
             - name: FLASK_ENV
