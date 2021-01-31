@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div >
     <h1>Users</h1>
     <div>
       <button class="pure-material-button-contained" @click="addEntry">Add User</button>
