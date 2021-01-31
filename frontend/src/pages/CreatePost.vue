@@ -4,14 +4,14 @@
     <div class="editor">
       <!-- <input v-model="title" placeholder="Title">
       <input v-model="author" placeholder="Author"> -->
-      <input v-model="username" placeholder="username">
+      <!-- <input v-model="username" placeholder="username"> -->
+      <input v-model="email" placeholder="email">
       <input type="password" v-model="password" placeholder="password">
       <input v-model="name" placeholder="name">
-      <input v-model="email" placeholder="email">
       <br>
       <!-- <wysiwyg v-model="content"  /> -->
     </div>
-    <button class="pure-material-button-contained" @click="post">Post</button>
+    <button class="pure-material-button-contained" @click="post">Add</button>
     <!-- <span v-html="content"></span> -->
   </div>
 </template>
@@ -25,28 +25,44 @@ export default {
       title: null,
       author: null,
       content: null,
+      password: null,
+      email: null,
+      name: null
     }
   },
   methods: {
-    post() {
-      let locPosts = JSON.parse(localStorage.getItem('posts'))
+    async post() {
+      // let locPosts = JSON.parse(localStorage.getItem('posts'))
 
-      let newPost = {
-        id: locPosts.length+1,
-        // title: this.title,
-        // author: this.author,
-        // content: this.content,
-        username: this.username,
-        password: this.password,
-        name: this.name,
-        email: this.email
+      // let newPost = {
+      //   id: locPosts.length+1,
+      //   // title: this.title,
+      //   // author: this.author,
+      //   // content: this.content,
+      //   username: this.username,
+      //   password: this.password,
+      //   name: this.name,
+      //   email: this.email
+      // }
+      
+      // locPosts.push(newPost)
+
+      try {
+        let response = await this.$http.post(`${this.$baseurl}/users/`, {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        })
+        console.log(response);
+        this.$router.push({name: 'Home'})
+      } catch (e) {
+        alert("an error occured")
+        console.log(e);
       }
       
-      locPosts.push(newPost)
+      // const data = JSON.stringify(locPosts)
+      // window.localStorage.setItem('posts', data)
       
-      const data = JSON.stringify(locPosts)
-      window.localStorage.setItem('posts', data)
-      this.$router.push({name: 'Home'})
     },
     navigate() {
       console.log("navigating")

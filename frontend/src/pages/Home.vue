@@ -7,8 +7,7 @@
     <div class="posts-container">
       <div class="posts" v-for="post in posts" :key="post.id" @click="navigatePost(post.id)">
         <h4>{{ post.name }}</h4>
-        <p>{{post.username}}</p>
-        <p>{{post.username}}@mail.com</p>
+        <p>{{post.email}}</p>
         <!-- <div class="post-content">
           <span v-html="post.content"></span>
         </div> -->
@@ -18,32 +17,42 @@
 </template>
 
 <script>
-var json = require('../dummy.json');
+// var json = require('../dummy.json');
 export default {
   name: 'Home',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
       posts: [],
-      userid: 123
+      userid: 123,
+      users: []
     }
   },
-  mounted() {
+  beforeMount() {
     // localStorage.clear()
-    const locPosts = localStorage.getItem('posts');
-    console.log(`local posts`, locPosts)
-    if (locPosts) {
-      this.posts = JSON.parse(window.localStorage.getItem('posts'))
-    } else {
-      this.posts = json
-      this.saveFile()
-    }
+    // const locPosts = localStorage.getItem('posts');
+    // if (locPosts) {
+    //   this.posts = JSON.parse(window.localStorage.getItem('posts'))
+    // } else {
+    //   this.posts = json
+    //   this.saveFile()
+    // }
+    this.fetchUsers()
   },
   methods: {
     saveFile() {
       const data = JSON.stringify(this.posts)
       window.localStorage.setItem('posts', data);
       console.log(JSON.parse(window.localStorage.getItem('posts')))
+    },
+    fetchUsers: function () {
+      const baseURI = `${this.$baseurl}/users/`
+      this.$http.get(baseURI)
+      .then((result) => {
+        this.users = result.data
+        this.posts = this.users.users
+        console.log(this.posts)
+      })
     },
     navigate() {
       console.log("navigating")
