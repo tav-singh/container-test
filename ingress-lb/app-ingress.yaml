@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: leui-test-ingress
+  name: app-ingress
   annotations:
     # add an annotation indicating the issuer to use.
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -9,7 +9,7 @@ metadata:
     # or a new one is created specifically for the HTTP01 challenge.
     acme.cert-manager.io/http01-edit-in-place: "true"
   labels:
-    app: leui-test
+    app: app
 spec:
   tls: # < placing a host in the TLS config will indicate a certificate should be created
   - hosts:
@@ -21,7 +21,7 @@ spec:
     http:
       paths:
       - backend:
-          serviceName: ui-test-1-service
+          serviceName: frontend-service
           servicePort: 80
   - host: api.gammaandhika.com
     http:
