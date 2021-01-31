@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: frontend-deployment
+  name: frontend-canary
   labels:
     app: frontend
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: frontend
   template:
-    metadata:
+    metadata: 
       labels:
         app: frontend
-        track: stable
+        track: canary
         version: 1.0.0
     spec:
       containers:
       - name: frontend-container
-        image: eu.gcr.io/earnest-acre-297416/ui-test
+        image: eu.gcr.io/earnest-acre-297416/ui-test@sha256:cfd12827001e4d9c7bce697a888564b81bdf3c74ca47aadda13884503057fe05
         ports:
         - containerPort: 80
 
