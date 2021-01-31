@@ -1,0 +1,65 @@
+
+rest-api:
+  name: rest-api-deployment
+  labels:
+      app: rest-api
+  serviceName: rest-api-service
+  replicas: 3
+  template:
+    spec:
+      containers:
+        - name: rest-api-container
+          image: eu.gcr.io/earnest-acre-297416/rest-api
+          ports:
+            - containerPort: 5000
+              port: 5000
+              servicePort: 5000
+
+frontend:
+  metadata:
+    name: ui-test-deployment
+    labels:
+      app: ui-test
+    serviceName: ui-test-service
+  replicas: 3
+  selector:
+      spec:
+        containers:
+        - name: ui-test-container
+          image: eu.gcr.io/earnest-acre-297416/ui-test
+          ports:
+          - containerPort: 80
+            nodePort: 30002
+            port: 8091
+            targetPort: 80
+
+postgres:
+  apiVersion: v1
+  image: postgres:13.1-alpine
+  replicas: 1
+  kind: ConfigMap
+  ports:
+    - port: 5432
+      nodePort: 30001
+      targetPort: 5432
+  metadata:
+    name: postgres-config
+    labels:
+      app: postgres
+  data:
+    POSTGRES_DB: postgresdb
+    POSTGRES_USER: postgresadmin
+    POSTGRES_PORT: "5432"
+
+  PersistentVolume:
+    hostPath:
+      path: "/var/lib/data"
+    capacity:
+      storage: 5Gi
+    accessModes:
+      - ReadWriteMany
+  PersistentVolumeClaim:
+    accessModes:
+      - ReadWriteMany
+    capacity:
+      storage: 5Gi
