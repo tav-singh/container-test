@@ -19,12 +19,17 @@ spec:
           image: eu.gcr.io/earnest-acre-297416/rest-api
           ports:
             - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: postgress-config
           env:
+            - name: POSTGRESS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgress-secret
+                  key: POSTGRESS_PASSWORD
             - name: DATABASE_URL
-              valueFrom: 
-                configMapKeyRef:
-                  name: postgres-config
-                  key: DATABASE_URL
+              value: postgres://$(POSTGRES_USER):$(POSTGRESS_PASSWORD)@postgres-service:$(POSTGRES_PORT)/$(POSTGRES_DB) 
             - name: FLASK_ENV
               value: development
 
