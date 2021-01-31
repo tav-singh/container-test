@@ -1,21 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test-deployment
+  name: frontend-deployment
   labels:
-    app: test
+    app: frontend
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: test
+      app: frontend
   template:
     metadata:
       labels:
-        app: test
+        app: frontend
     spec:
       containers:
-      - name: itest-container
+      - name: frontend-container
         image: eu.gcr.io/earnest-acre-297416/ui-test
         ports:
         - containerPort: 80
+
